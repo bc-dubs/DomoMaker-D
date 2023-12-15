@@ -36,7 +36,7 @@ const sendPost = async (url, data, handler) => {
 };
 
 const hideError = () => {
-    ducomunt.getElementById('domoMessage').classList.add('hidden');
+    document.getElementById('domoMessage').classList.add('hidden');
 }
 
 module.exports = {
