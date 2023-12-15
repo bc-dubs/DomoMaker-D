@@ -263,3 +263,14 @@ h3.domoAge {
 .domo:last-child {
     margin-bottom:10px;
 }
+
+.fave {
+    background-color: #ff7f50;
+}
+
+.fave:hover {
+    transition: border-color 0.2s ease-out;
+    border-color: rgba(255,255,255, 0.8);
+    transition: background-color 0.6s ease-out;
+    background-color: #ff8f60;
+}

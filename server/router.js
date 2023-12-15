@@ -14,6 +14,12 @@ const router = (app) => {
 
   app.get('/getDomos', mid.requiresLogin, controllers.Domo.getDomos);
 
+  app.post('/swapDomos', mid.requiresLogin, controllers.Domo.swapDomos);
+
+  app.post('/deleteDomo', mid.requiresLogin, controllers.Domo.deleteDomo);
+
+  app.post('/toggleFave', mid.requiresLogin, controllers.Domo.toggleFave);
+
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
 };
 

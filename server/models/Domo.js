@@ -24,6 +24,16 @@ const DomoSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  priority: {
+    type: Number,
+    min: 0,
+    default: 0,
+  },
+  favorite: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
 });
 
 DomoSchema.statics.toAPI = (doc) => ({

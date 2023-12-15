@@ -20,6 +20,42 @@ const handleDomo = (e) => {
     return false;
 }
 
+const moveDomoUp = async (e) => {
+    e.preventDefault();
+    helper.hideError();
+
+    const domoNode = e.target.parentElement;
+
+    helper.sendPost('/swapDomos', {upper: parseInt(domoNode.getAttribute("data-priority")) - 1}, loadDomosFromServer);
+}
+
+const moveDomoDown = async (e) => {
+    e.preventDefault();
+    helper.hideError();
+
+    const domoNode = e.target.parentElement;
+
+    helper.sendPost('/swapDomos', {upper: domoNode.getAttribute("data-priority")}, loadDomosFromServer);
+}
+
+const deleteDomo = async (e) => {
+    e.preventDefault();
+    helper.hideError();
+
+    const domoNode = e.target.parentElement;
+
+    helper.sendPost('/deleteDomo', {_id: domoNode.id}, loadDomosFromServer);
+}
+
+const toggleFaveDomo = async (e) => {
+    e.preventDefault();
+    helper.hideError();
+
+    const domoNode = e.target.parentElement;
+
+    helper.sendPost('/toggleFave', {_id: domoNode.id}, loadDomosFromServer);
+}
+
 const DomoForm = (props) => {
     return (
         <form id="domoForm"
@@ -49,10 +85,14 @@ const DomoList = (props) => {
 
     const domoNodes = props.domos.map(domo => {
         return (
-            <div key={domo._id} className="domo">
+            <div key={domo._id} id={domo._id} data-priority={domo.priority} className={domo.favorite? "domo fave": "domo"}>
                 <img src="/assets/img/domoface.jpeg" alt="domo face" className="domoFace" />
                 <h3 className='domoName'> Name: {domo.name} </h3>
                 <h3 className='domoAge'> Age: {domo.age} </h3>
+                <button className='upButton' onClick={moveDomoUp} style={{visibility: domo.priority <= 0? "hidden":"visible"}}>&#x2191;</button>
+                <button className='downButton' onClick={moveDomoDown} style={{visibility: domo.priority >= props.domos.length - 1? "hidden":"visible"}}>&#x2193;</button>
+                <button className='deleteButton' onClick={deleteDomo}>&#x1F5D1;</button>
+                <button className='faveButton' onClick={toggleFaveDomo}>&#x2606;</button>
             </div>
         );
     });
